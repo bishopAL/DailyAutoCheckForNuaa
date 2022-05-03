@@ -6,6 +6,7 @@ import sys
 import time
 import traceback
 import requests
+from send_mail import send_mail
 
 try_times = 1   # 失败这么多次后就直接不管了
 delay = 2   # 访问页面前的延迟，为了防止过快访问网站被封IP
@@ -233,10 +234,22 @@ def get_uid_id(cookies):
     print('获取id、uid失败')
     return False, '获取id、uid失败\n'
 
+def send_result(recever, result, messgae):
+    mail_sender = 'bishop-222@nuaa.edu.cn'
+    smtp_password = 'ZYbing123'
+    smtp_host = 'smtp.exmail.qq.com'
+    if result == True:
+        send_mail(mail_sender, smtp_password, smtp_host,
+                  recever, messgae, '打卡成功', '主人', '打卡姬')
+    else:
+        send_mail(mail_sender, smtp_password, smtp_host,
+                  recever, messgae, '打卡失败', '主人', '打卡姬')
+
 cookies, message = login('BX2005006', 'ZYbing123')
 geo_api_info = get_address_info(118.820266,32.035024)
 # uid = 260460
 # id = 25555719
 uid, id, message1 = get_uid_id(cookies)
 result, message2 = check(cookies, geo_api_info, id, uid)
-print(message1+message2)
+send_result('470797339@qq.com', result, message)
+
