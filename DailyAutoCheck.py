@@ -44,194 +44,194 @@ def login(stu_number, password):
     return {}, '登陆结果：login faild,请检查账号密码\n'
 
 def get_address_info(longitude, latitude):
-for _ in range(try_times):
-    try:
-        time.sleep(delay)
-        response = requests.get(
-            'https://restapi.amap.com/v3/geocode/regeo', params={
-                'key': '729923f88542d91590470f613adb27b5',
-                's': 'rsv3',
-                'location': str(longitude) + ',' + str(latitude)
-            })
-        geo_data = json.loads(response.text)
-        geo_data = geo_data['regeocode']
-        geo_api_info = {
-            "type": "complete",
-            "position": {
-                "Q": latitude,
-                "R": longitude,
-                "lng": longitude,
-                "lat": latitude
-            },
-            "location_type": "html5",
-            "message": "Get ipLocation failed.Get geolocation success.Convert Success.Get address success.",
-            "accuracy": 102,    # ???
-            "isConverted": True,    # ?
-            "status": 1,
-            "addressComponent": {
-                "citycode": geo_data['addressComponent']['citycode'],
-                "adcode": geo_data['addressComponent']['adcode'],
-                "businessAreas": [],
-                "neighborhoodType": "",
-                "neighborhood": "",
-                "building": "",
-                "buildingType": "",
-                "street": geo_data['addressComponent']['streetNumber']['street'],
-                "streetNumber": geo_data['addressComponent']["streetNumber"]['number'],
-                "country": geo_data['addressComponent']['country'],
-                "province": geo_data['addressComponent']['province'],
-                "city": geo_data['addressComponent']['city'],
-                "district": geo_data['addressComponent']['district'],
-                "township": geo_data['addressComponent']['township']
-            },
-            "formattedAddress": geo_data['formatted_address'],
-            "roads": [],
-            "crosses": [],
-            "pois": [],
-            "info": "SUCCESS"
-        }
-        return geo_api_info
-    except:
-        traceback.print_exc()
-return geo_api_info
+    for _ in range(try_times):
+        try:
+            time.sleep(delay)
+            response = requests.get(
+                'https://restapi.amap.com/v3/geocode/regeo', params={
+                    'key': '729923f88542d91590470f613adb27b5',
+                    's': 'rsv3',
+                    'location': str(longitude) + ',' + str(latitude)
+                })
+            geo_data = json.loads(response.text)
+            geo_data = geo_data['regeocode']
+            geo_api_info = {
+                "type": "complete",
+                "position": {
+                    "Q": latitude,
+                    "R": longitude,
+                    "lng": longitude,
+                    "lat": latitude
+                },
+                "location_type": "html5",
+                "message": "Get ipLocation failed.Get geolocation success.Convert Success.Get address success.",
+                "accuracy": 102,    # ???
+                "isConverted": True,    # ?
+                "status": 1,
+                "addressComponent": {
+                    "citycode": geo_data['addressComponent']['citycode'],
+                    "adcode": geo_data['addressComponent']['adcode'],
+                    "businessAreas": [],
+                    "neighborhoodType": "",
+                    "neighborhood": "",
+                    "building": "",
+                    "buildingType": "",
+                    "street": geo_data['addressComponent']['streetNumber']['street'],
+                    "streetNumber": geo_data['addressComponent']["streetNumber"]['number'],
+                    "country": geo_data['addressComponent']['country'],
+                    "province": geo_data['addressComponent']['province'],
+                    "city": geo_data['addressComponent']['city'],
+                    "district": geo_data['addressComponent']['district'],
+                    "township": geo_data['addressComponent']['township']
+                },
+                "formattedAddress": geo_data['formatted_address'],
+                "roads": [],
+                "crosses": [],
+                "pois": [],
+                "info": "SUCCESS"
+            }
+            return geo_api_info
+        except:
+            traceback.print_exc()
+    return geo_api_info
 
 def check(cookies, geo_api_info, id, uid):
-# Post的data，如果你是勇士可以尝试给这个打上注释，老谜语人了，看不懂ヾ(•ω•`)o
-data = {
-    'sfzhux': '0',
-    'zhuxdz': '',
-    'szgj': '',
-    'szcs': '',
-    'szgjcs': '',
-    'sfjwfh': '0',
-    'sfyjsjwfh': '0',
-    'sfjcjwfh': '0',
-    'sflznjcjwfh': '0',
-    'sflqjkm': '4',
-    'jkmys': '1',
-    'sfjtgfxdq': '0',
-    'nuaaxgymjzqk':'4',
-    'dyzjzsj': '',
-    'bfhzjyq': '0',
-    'hxyxjzap': '0',
-    'yjzjsj': '',
-    'sfjkyc': '0',
-    'sftjlkjc': '',
-    'lkjctlsj': '',
-    'sfsylkjcss': '',
-    'gjzsftjlkjc': '',
-    'gjzlkjctlsj': '',
-    'gjzsfsylkjcss': '',
-    'ifhxjc': '',
-    'hsjconetime': '',
-    'hsjconeplace': '',
-    'hsjconejg': '',
-    'hsjctwotime': '',
-    'hsjctwoplace': '',
-    'hsjctwojg': '',
-    'hsjcthreetime': '',
-    'hsjcthreeplace': '',
-    'hsjcthreejg': '',
-    'hsjcfourtime': '',
-    'hsjcfourplace': '',
-    'hsjcfourjg': '',
-    'ywchxjctime': '',
-    'hsjclist': '%7B%7D',
-    'njrddz': 'b11',
-    'gzczxq': '1',
-    'ifznqgfxljs': '',
-    'iflsqgfxljs': '',
-    'zrwjtw': '',
-    'jrzjtw': '',
-    'jrlvymjrq': '',
-    'ifcyglq': '0',
-    'wskmyy': '',
-    'zhycjgdqifjn': '',
-    'dqsfzgfxszqs': '0',
-    'gqsfyzgfxljs': '0',
-    'gqsfyqzfhryjc': '0',
-    'sfyjwljqyhg': '0',
-    'cjfxsfhs': '1',
-    'bzxyy': '',
-    'bzxyydesc': '',
-    'tw': '',
-    'sfcxtz': '0',
-    'sfjcbh': '0',
-    'sfcxzysx': '0',
-    'qksm': '',
-    'sfyyjc': '0',
-    'jcjgqr': '0',
-    'remark': '',
-    'address': geo_api_info['formattedAddress'],
-    'geo_api_info': json.dumps(geo_api_info, separators=(',', ':')),
-    'area': geo_api_info['addressComponent']['province'] + ' ' + geo_api_info['addressComponent']['city']
-             + ' ' + geo_api_info['addressComponent']['district'],
-    'province': geo_api_info['addressComponent']['province'],
-    'city': geo_api_info['addressComponent']['city'],
-    'sfzx': '0',
-    'sfjcwhry': '0',
-    'sfjchbry': '0',
-    'sfcyglq': '0',
-    'gllx': '',
-    'glksrq': '',
-    'jcbhlx': '',
-    'jcbhrq': '',
-    'bztcyy': '',
-    'sftjhb': '0',
-    'sftjwh': '0',
-    'sftjwz': '0',
-    'sfjcwzry': '0',
-    'jcjg': '',
-    'date': time.strftime("%Y%m%d", time.localtime()),  # 打卡年月日一共8位
-    'uid': uid,  # UID
-    'created': round(time.time()), # 时间戳
-    'jcqzrq': '',
-    'sfjcqz': '',
-    'szsqsfybl': '0',
-    'sfsqhzjkk': '0',
-    'sqhzjkkys': '',
-    'sfygtjzzfj': '0',
-    'gtjzzfjsj': '',
-    'created_uid': '0',
-    'id': id,# 打卡的ID，其实这个没影响的
-    'gwszdd': '',
-    'sfyqjzgc': '',
-    'jrsfqzys': '',
-    'jrsfqzfy': '',
-    'ismoved': '0'
-}
-for _ in range(try_times):
-    try:
-        time.sleep(delay)
-        response = requests.post('https://m.nuaa.edu.cn/ncov/wap/default/save', data=data, cookies=cookies)
-        print('sign statue code:', response.status_code)
-        #print('sign return:', response.text) 
-        response.encoding = 'utf-8'
+    # Post的data，如果你是勇士可以尝试给这个打上注释，老谜语人了，看不懂ヾ(•ω•`)o
+    data = {
+        'sfzhux': '0',
+        'zhuxdz': '',
+        'szgj': '',
+        'szcs': '',
+        'szgjcs': '',
+        'sfjwfh': '0',
+        'sfyjsjwfh': '0',
+        'sfjcjwfh': '0',
+        'sflznjcjwfh': '0',
+        'sflqjkm': '4',
+        'jkmys': '1',
+        'sfjtgfxdq': '0',
+        'nuaaxgymjzqk':'4',
+        'dyzjzsj': '',
+        'bfhzjyq': '0',
+        'hxyxjzap': '0',
+        'yjzjsj': '',
+        'sfjkyc': '0',
+        'sftjlkjc': '',
+        'lkjctlsj': '',
+        'sfsylkjcss': '',
+        'gjzsftjlkjc': '',
+        'gjzlkjctlsj': '',
+        'gjzsfsylkjcss': '',
+        'ifhxjc': '',
+        'hsjconetime': '',
+        'hsjconeplace': '',
+        'hsjconejg': '',
+        'hsjctwotime': '',
+        'hsjctwoplace': '',
+        'hsjctwojg': '',
+        'hsjcthreetime': '',
+        'hsjcthreeplace': '',
+        'hsjcthreejg': '',
+        'hsjcfourtime': '',
+        'hsjcfourplace': '',
+        'hsjcfourjg': '',
+        'ywchxjctime': '',
+        'hsjclist': '%7B%7D',
+        'njrddz': 'b11',
+        'gzczxq': '1',
+        'ifznqgfxljs': '',
+        'iflsqgfxljs': '',
+        'zrwjtw': '',
+        'jrzjtw': '',
+        'jrlvymjrq': '',
+        'ifcyglq': '0',
+        'wskmyy': '',
+        'zhycjgdqifjn': '',
+        'dqsfzgfxszqs': '0',
+        'gqsfyzgfxljs': '0',
+        'gqsfyqzfhryjc': '0',
+        'sfyjwljqyhg': '0',
+        'cjfxsfhs': '1',
+        'bzxyy': '',
+        'bzxyydesc': '',
+        'tw': '',
+        'sfcxtz': '0',
+        'sfjcbh': '0',
+        'sfcxzysx': '0',
+        'qksm': '',
+        'sfyyjc': '0',
+        'jcjgqr': '0',
+        'remark': '',
+        'address': geo_api_info['formattedAddress'],
+        'geo_api_info': json.dumps(geo_api_info, separators=(',', ':')),
+        'area': geo_api_info['addressComponent']['province'] + ' ' + geo_api_info['addressComponent']['city']
+                + ' ' + geo_api_info['addressComponent']['district'],
+        'province': geo_api_info['addressComponent']['province'],
+        'city': geo_api_info['addressComponent']['city'],
+        'sfzx': '0',
+        'sfjcwhry': '0',
+        'sfjchbry': '0',
+        'sfcyglq': '0',
+        'gllx': '',
+        'glksrq': '',
+        'jcbhlx': '',
+        'jcbhrq': '',
+        'bztcyy': '',
+        'sftjhb': '0',
+        'sftjwh': '0',
+        'sftjwz': '0',
+        'sfjcwzry': '0',
+        'jcjg': '',
+        'date': time.strftime("%Y%m%d", time.localtime()),  # 打卡年月日一共8位
+        'uid': uid,  # UID
+        'created': round(time.time()), # 时间戳
+        'jcqzrq': '',
+        'sfjcqz': '',
+        'szsqsfybl': '0',
+        'sfsqhzjkk': '0',
+        'sqhzjkkys': '',
+        'sfygtjzzfj': '0',
+        'gtjzzfjsj': '',
+        'created_uid': '0',
+        'id': id,# 打卡的ID，其实这个没影响的
+        'gwszdd': '',
+        'sfyqjzgc': '',
+        'jrsfqzys': '',
+        'jrsfqzfy': '',
+        'ismoved': '0'
+    }
+    for _ in range(try_times):
+        try:
+            time.sleep(delay)
+            response = requests.post('https://m.nuaa.edu.cn/ncov/wap/default/save', data=data, cookies=cookies)
+            print('sign statue code:', response.status_code)
+            #print('sign return:', response.text) 
+            response.encoding = 'utf-8'
 
-        if response.text.find('成功') >= 0:
-            print('打卡成功')
-            return True, '打卡成功' + '\n'
-        else:
-            print('打卡失败')
-    except:
-        traceback.print_exc()
-return False, '打卡失败' + '\n'
+            if response.text.find('成功') >= 0:
+                print('打卡成功')
+                return True, '打卡成功' + '\n'
+            else:
+                print('打卡失败')
+        except:
+            traceback.print_exc()
+    return False, '打卡失败' + '\n'
 
 def get_uid_id(cookies):
-for _ in range(try_times):
-    try:
-        time.sleep(delay)
-        response = requests.get(
-            'https://m.nuaa.edu.cn/ncov/wap/default', cookies=cookies)
-        response.encoding = 'utf-8'
-        uid = re.search(r'"uid":"([0-9]*)"', response.text).group(1)
-        id = re.search(r'"id":([0-9]*)', response.text).group(1)
-        return uid,id, 'UID获取成功\n'
-    except:
-        traceback.print_exc()
-# 就这样吧，让他崩溃，万一假打卡了就不好了
-print('获取id、uid失败')
-return False, '获取id、uid失败\n'
+    for _ in range(try_times):
+        try:
+            time.sleep(delay)
+            response = requests.get(
+                'https://m.nuaa.edu.cn/ncov/wap/default', cookies=cookies)
+            response.encoding = 'utf-8'
+            uid = re.search(r'"uid":"([0-9]*)"', response.text).group(1)
+            id = re.search(r'"id":([0-9]*)', response.text).group(1)
+            return uid,id, 'UID获取成功\n'
+        except:
+            traceback.print_exc()
+    # 就这样吧，让他崩溃，万一假打卡了就不好了
+    print('获取id、uid失败')
+    return False, '获取id、uid失败\n'
 
 cookies, message = login('BX2005006', 'ZYbing123')
 geo_api_info = get_address_info(118.820266,32.035024)
