@@ -1,10 +1,10 @@
 {
-    "UserName":"BX2005006", 
-    "Password":"ZYbing123",
+    "UserName":"BL2000000", 
+    "Password":"XXXXXXXXXX",
     "Longitude":118.820266,
     "Latitude":32.035024,
-    "SenderMail":"bishop-222@nuaa.edu.cn",
-    "SenderMailPassword":"ZYbing123",
+    "SenderMail":"XXXX@nuaa.edu.cn",
+    "SenderMailPassword":"XXXXXXXX",
     "SenderMailHost":"smtp.exmail.qq.com",
-    "ReceiverMail":"470797339@qq.com"
+    "ReceiverMail":"XXXXXXXXXX@qq.com"
 }
