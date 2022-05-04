@@ -247,8 +247,6 @@ with open(path, "r") as f:
     userData = json.load(f)
 cookies, message = login(userData['UserName'], userData['Password'])
 geo_api_info = get_address_info(userData['Longitude'],userData['Latitude'])
-# uid = 260460
-# id = 25555719
 uid, id, message1 = get_uid_id(cookies)
 result, message2 = check(cookies, geo_api_info, id, uid)
 send_result(userData['SenderMail'], userData['SenderMailPassword'], userData['SenderMailHost'], userData['ReceiverMail'], result, message)
