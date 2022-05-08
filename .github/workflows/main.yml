@@ -3,8 +3,8 @@ name: 'Check'
 on:
   push:
   schedule:
-  # 16+8=24
-  - cron: '30 16 * * *' 
+  # 0+8=8 大约八点半完成打卡
+  - cron: '0 0 * * *' 
 
 jobs:
   bot:
