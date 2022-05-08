@@ -237,10 +237,10 @@ def get_uid_id(cookies):
 def send_result(mail_sender, smtp_password, smtp_host, recever, result, messgae):
     if result == True:
         send_mail(mail_sender, smtp_password, smtp_host,
-                  recever, messgae, '打卡成功', '主人', time.strftime("%Y%m%d", time.localtime()) + '打卡姬')
+                  recever, messgae, '打卡成功', '主人', time.strftime("%Y%m%d", time.localtime()) + '的打卡姬')
     else:
         send_mail(mail_sender, smtp_password, smtp_host,
-                  recever, messgae, '打卡失败', '主人', time.strftime("%Y%m%d", time.localtime()) + '打卡姬')
+                  recever, messgae, '打卡失败', '主人', time.strftime("%Y%m%d", time.localtime()) + '的打卡姬')
 
 path = "./userData.json"
 with open(path, "r") as f:
