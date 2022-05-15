@@ -10,4 +10,10 @@
 3. 设置Github的Action，过程参考https://github.com/1003389754/nuaa_check_action 的step3。
 4. 每日打卡时间可于DailyAutoCheckForNuaa/.github/workflows/main.yml设置，默认设置为0点，但由于Github服务器在美国，因此Github在0点（执行有大约半小时延迟）自动执行脚本，大家可以在国内时间8:30左右收到成功通知。
 
+## 如何抓包
+笔者用的是ios平台的stream软件，软件具体如何使用可以百度。在我们的案例中，在i南航的app上填好相关打卡选项，切换到stream点开始抓包，然后切换到i南航打卡，最后切换到stream点结束。抓包信息中POST的第一个包就是我们需要的。包信息如何填写请参考DailyAutoCheck.py。
+
+## 如果收到打卡失败是啥情况
+最大的原因可能是打卡项目有更新！遇到失败，请在当天手动打卡。如果这个项目没有更新，则说明手动打卡后软件可以正常使用；如有更新，请升级到最新版本！
+
 ## 欢迎issue讨论
