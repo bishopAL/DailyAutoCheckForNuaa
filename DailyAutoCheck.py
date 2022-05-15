@@ -99,7 +99,7 @@ def get_address_info(longitude, latitude):
 def check(cookies, geo_api_info, id, uid):
     # Post的data，如果你是勇士可以尝试给这个打上注释，老谜语人了，看不懂ヾ(•ω•`)o
     data = {
-        'sfzhux': '0',
+        'sfzhux': '1',
         'zhuxdz': '',
         'szgj': '',
         'szcs': '',
@@ -142,8 +142,8 @@ def check(cookies, geo_api_info, id, uid):
         'gzczxq': '1',
         'ifznqgfxljs': '',
         'iflsqgfxljs': '',
-        'zrwjtw': '',
-        'jrzjtw': '',
+        'zrwjtw': '1',
+        'jrzjtw': '1',
         'jrlvymjrq': '',
         'ifcyglq': '0',
         'wskmyy': '',
@@ -169,7 +169,7 @@ def check(cookies, geo_api_info, id, uid):
                 + ' ' + geo_api_info['addressComponent']['district'],
         'province': geo_api_info['addressComponent']['province'],
         'city': geo_api_info['addressComponent']['city'],
-        'sfzx': '0',
+        'sfzx': '1',
         'sfjcwhry': '0',
         'sfjchbry': '0',
         'sfcyglq': '0',
@@ -199,7 +199,13 @@ def check(cookies, geo_api_info, id, uid):
         'sfyqjzgc': '',
         'jrsfqzys': '',
         'jrsfqzfy': '',
-        'ismoved': '0'
+        'sfjzxg': '0',
+        'skmcolor': '1',
+        'ismoved': '0',
+        'gtjzryxcsfyc': '1',
+        'jgzgfxxxdz': '',
+        'jgzgfxdq': '',
+        'gtjzryxcsfycQt': ''
     }
     for _ in range(try_times):
         try:
@@ -237,10 +243,10 @@ def get_uid_id(cookies):
 def send_result(mail_sender, smtp_password, smtp_host, recever, result, messgae):
     if result == True:
         send_mail(mail_sender, smtp_password, smtp_host,
-                  recever, messgae, '打卡成功', '主人', time.strftime("%Y%m%d", time.localtime()) + '的打卡姬')
+                  recever, messgae, '打卡成功', '主人', time.strftime("%Y%m%d", time.localtime()) + '打卡姬')
     else:
         send_mail(mail_sender, smtp_password, smtp_host,
-                  recever, messgae, '打卡失败', '主人', time.strftime("%Y%m%d", time.localtime()) + '的打卡姬')
+                  recever, messgae, '打卡失败', '主人', time.strftime("%Y%m%d", time.localtime()) + '打卡姬')
 
 path = "./userData.json"
 with open(path, "r") as f:
